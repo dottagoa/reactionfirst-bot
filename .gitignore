@@ -4,5 +4,9 @@ node_modules/
 # Config file
 config.*
 
+# env
+.env
+*.env
+
 # DS Store
 .DS_Store

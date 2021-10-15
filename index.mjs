@@ -1,8 +1,11 @@
 import fs from 'fs';
 import ms from 'ms';
 import { Client, Collection, Intents, MessageEmbed } from 'discord.js';
-import env from './config.json';
 import * as util from './util.mjs';
+
+import dotenv from 'dotenv';
+dotenv.config();
+const { TOKEN } = process.env;
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
@@ -49,7 +52,7 @@ client.on('interactionCreate', async (interaction) => {
         // -- APPLICATION CONSTANTS -- //
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
         const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
-        const coolUsers, terribleUsers, reactTimes = [];
+        const { coolUsers, terribleUsers, reactTimes } = [];
 
         // -- EMBEDS -- //
         let embed1 = {
@@ -133,4 +136,4 @@ client.on('interactionCreate', async (interaction) => {
 
 let inProgress = false;
 let forLoopDone = true;
-client.login(env.token);
+client.login(TOKEN);
