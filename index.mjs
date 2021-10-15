@@ -13,12 +13,9 @@ client.once('ready', () => {
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-    if (reaction.message.partial) await reaction.message.fetch();
-    if (reaction.partial) await reaction.fetch();
     if (user.bot) return;
-    if (!reaction.message.guild) return;
-    if (forLoopDone) return;
-    reaction.users.remove();
+    if (forLoopDone == true) return;
+    reaction.users.remove(user);
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -35,32 +32,46 @@ client.on('interactionCreate', async (interaction) => {
         const time = 10000; // time for reactions to be collected before timing out
         const emojiList = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣']; // emojis to use for reactions
 
-        // -- APPLICATION CONSTANTS -- //
+        // -- ARGUMENTS -- //
         const reactionNum = interaction.options.get('reactions').value; // argument: reaction count
         const firstUsers = interaction.options.get('usercount').value; // argument: first X users to show
+
+        // -- VARIABLE CHECKS -- //
+        if (reactionNum === 0) {
+            inProgress = false;
+            return interaction.reply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
+        }
+        if (firstUsers === 0) {
+            inProgress = false;
+            return interaction.reply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
+        }
+
+        // -- APPLICATION CONSTANTS -- //
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
         const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
-        const coolUsers = [];
-        const terribleUsers = [];
-        const reactTimes = [];
+        const coolUsers, terribleUsers, reactTimes = [];
+
+        // -- EMBEDS -- //
         let embed1 = {
             title: 'Reaction test! (preprocessing)',
             description: "**PLEASE WAIT!** I'm adding the reactions, then I'll show you the emoji to choose!",
         };
+        // prettier-ignore
         let embed2 = {
             title: 'Reaction test! (in progress)',
-            description: `Click the ${specialEmoji} reaction as fast as you can. The first ${firstUsers} people to react will be seen below.`,
+            description: `Click the ${specialEmoji} reaction as fast as you can. The first ${firstUsers == 1 ? `person` : `${firstUsers} people`} people to react will be seen below.`,
         };
+        // prettier-ignore
         let embed3 = {
             title: 'Reaction test! (complete)',
-            description: "Here's a list of the people who reacted, in order from the first reaction to the fifth:",
+            description: `Here's ${firstUsers == 1 ? `the first person` : `a list of the ${firstUsers} people`} who reacted before anyone else${firstUsers != 1 ? ', in the order of how fast they responded' : ''}:`,
             fields: [],
         };
 
         // -- INITIAL MESSAGE -- //
         if (reactionNum >= emojiList.length)
             return interaction.reply({
-                content: "Can't complete request -- your reaction count is larger than the amount of available emojis.",
+                content: 'Your reaction count is larger than the amount of available emojis!',
                 ephemeral: true,
             });
 
@@ -79,31 +90,37 @@ client.on('interactionCreate', async (interaction) => {
                     await msg.react(emoti[r]);
                 }
                 forLoopDone = true;
+                await util.rmHumanReactions(msg);
                 await msg.edit({
-                    embeds: [embed2]
+                    embeds: [embed2],
                 });
 
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
                 collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user.id) && coolUsers.length < reactionNum) {
+                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < reactionNum && !terribleUsers.includes(user)) {
                         coolUsers.push(user);
                         reactTimes.push(Date.now() - scheduledTime);
-                    } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user.id)) {
+                    } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
                     }
-                    if (coolUsers.length < reactionNum) collector.stop("Enough reactions obtained");
+                    if (coolUsers.length > reactionNum) collector.stop('Enough reactions obtained');
                 });
 
                 collector.on('end', (collector) => {
-                    console.log(`\nPeople who reacted correctly: ${coolUsers.length != 0 ? coolUsers.join(', ') : 'nobody!'}`);
-                    console.log(`People who reacted incorrectly: ${terribleUsers.length != 0 ? terribleUsers.join(', ') : 'nobody!'}\n`);
+                    console.log(`\nPeople who reacted correctly: ${coolUsers.length != 0 ? `${coolUsers.length}` : 'nobody!'}`);
+                    console.log(`People who reacted incorrectly: ${terribleUsers.length != 0 ? `${terribleUsers.length}` : 'nobody!'}\n`);
 
-                    const fields = coolUsers.map((v, i) => `${i+1}.) ${v.tag}`);
-                    for (var i = 0; i != fields.length; ++i) embed3.fields.push({
-                        name: fields[i],
-                        value: `${reactTimes[i]}ms - ${coolUsers[i]}`
-                    });
+                    const fields = coolUsers.map((v, i) => `${i + 1}.) ${v.tag}`);
+                    for (var i = 0; i != fields.length; ++i)
+                        embed3.fields.push({
+                            name: fields[i],
+                            value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
+                        });
+                    if (coolUsers.length == 0 || coolUsers.length == 0) {
+                        embed3.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
+                        msg.reactions.removeAll();
+                    }
                     msg.edit({
                         embeds: [embed3],
                     });

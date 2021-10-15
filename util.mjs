@@ -27,3 +27,8 @@ export async function stopCollection(result) {
         description: "Here's a list of people who reacted, in order from who reacted first:",
     };
 }
+
+export async function rmHumanReactions(message) {
+    if(!message.reactions.cache.users) return;
+    message.reactions.cache.forEach(r => { r.cache.users.filter(u => !u.bot).forEach(usr => { r.remove(usr) }) });
+}
