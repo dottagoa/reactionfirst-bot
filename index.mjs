@@ -52,7 +52,7 @@ client.on('interactionCreate', async (interaction) => {
         // -- APPLICATION CONSTANTS -- //
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
         const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
-        const { coolUsers, terribleUsers, reactTimes } = [];
+        const coolUsers, terribleUsers, reactTimes = [];
 
         // -- EMBEDS -- //
         let embed1 = {
