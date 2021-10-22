@@ -20,11 +20,9 @@ client.on('interactionCreate', async (interaction) => {
 
     const { commandName } = interaction;
 
-    if (commandName === 'firstreaction') {
-        // -- INITIAL CHECKS -- //
-        if (inProgress) return interaction.reply({ content: "Can't complete request -- previous command in progress.", ephemeral: true });
-        inProgress = true;
+    await interaction.deferReply();
 
+    if (commandName === 'firstreaction') {
         // -- USER VARIABLES -- //
         const time = 10000; // time for reactions to be collected before timing out
         const emojiList = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣']; // emojis to use for reactions
@@ -85,9 +83,8 @@ client.on('interactionCreate', async (interaction) => {
         });
 
         const message = await interaction
-            .reply({
+            .editReply({
                 embeds: [embed1],
-                fetchReply: true,
             })
             .then(async (msg) => {
                 forLoopDone = false;
@@ -97,7 +94,7 @@ client.on('interactionCreate', async (interaction) => {
                 forLoopDone = true;
 
                 setTimeout(async function () {
-                    await msg.edit({
+                    await msg.editReply({
                         embeds: [embed2],
                     });
                 }, 1000);
@@ -128,16 +125,13 @@ client.on('interactionCreate', async (interaction) => {
                         embed3.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
                         msg.reactions.removeAll();
                     }
-                    msg.edit({
+                    msg.editReply({
                         embeds: [embed3],
                     });
                 });
             });
-
-        inProgress = false;
     }
 });
 
-let inProgress = false;
 let forLoopDone = true;
 client.login(TOKEN);
