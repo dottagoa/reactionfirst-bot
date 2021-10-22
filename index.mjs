@@ -96,7 +96,7 @@ client.on('interactionCreate', async (interaction) => {
                 }
                 forLoopDone = true;
 
-                await setTimeout(async function () {
+                setTimeout(async function () {
                     await msg.edit({
                         embeds: [embed2],
                     });
