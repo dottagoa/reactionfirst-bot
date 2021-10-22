@@ -116,7 +116,9 @@ client.on('interactionCreate', async (interaction) => {
                 collector.on('collect', (reaction, user) => {
                     if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
                         reactTimes.push(baseTime - reaction.creationTime);
-                        console.log(`${user.username} reacted with ${specialEmoji} in ${reactTimes - reaction.creationTime}ms`);
+                        console.log(`${user.username} reacted with ${specialEmoji} in ${baseTime - reaction.creationTime}ms`);
+                        console.log(baseTime);
+                        console.log(reaction.creationTime);
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
