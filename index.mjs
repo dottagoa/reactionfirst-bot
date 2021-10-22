@@ -94,7 +94,7 @@ client.on('interactionCreate', async (interaction) => {
                 forLoopDone = true;
 
                 setTimeout(async function () {
-                    await msg.editReply({
+                    await msg.edit({
                         embeds: [embed2],
                     });
                 }, 1000);
@@ -125,7 +125,7 @@ client.on('interactionCreate', async (interaction) => {
                         embed3.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
                         msg.reactions.removeAll();
                     }
-                    msg.editReply({
+                    msg.edit({
                         embeds: [embed3],
                     });
                 });
