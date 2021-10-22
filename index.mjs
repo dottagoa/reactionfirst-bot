@@ -103,7 +103,7 @@ client.on('interactionCreate', async (interaction) => {
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
                 collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < reactionNum && !terribleUsers.includes(user)) {
+                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
                         coolUsers.push(user);
                         reactTimes.push(Date.now() - scheduledTime);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
