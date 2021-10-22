@@ -78,6 +78,12 @@ client.on('interactionCreate', async (interaction) => {
             return reaction.emoji.name === specialEmoji.toString();
         };
 
+        client.on('messageReactionAdd', async (reaction, user) => {
+            if (user.bot) return;
+            if (forLoopDone == true) return;
+            terribleUsers.push(user);
+        });
+
         const message = await interaction
             .reply({
                 embeds: [embed1],
@@ -134,9 +140,4 @@ client.on('interactionCreate', async (interaction) => {
 
 let inProgress = false;
 let forLoopDone = true;
-client.on('messageReactionAdd', async (reaction, user) => {
-    if (user.bot) return;
-    if (forLoopDone == true) return;
-    terribleUsers.push(user);
-});
 client.login(TOKEN);
