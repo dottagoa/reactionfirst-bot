@@ -42,6 +42,9 @@ client.on('interactionCreate', async (interaction) => {
         }
 
         // -- APPLICATION CONSTANTS -- //
+        const min = 1; // minimum time IN SECONDS
+        const max = 3; // maximum time IN SECONDS
+        const delay = (Math.random() * (max - min) + min) * 1000; // delay in milliseconds
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
         const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
         const coolUsers = [];
@@ -55,11 +58,16 @@ client.on('interactionCreate', async (interaction) => {
         };
         // prettier-ignore
         let embed2 = {
+            title: 'GET READY TO REACT!',
+            description: "Selecting main emoji, get ready to react! **__If you react while I'm choosing, you'll be disqualified this round!__**"
+        }
+        // prettier-ignore
+        let embed3 = {
             title: 'Reaction test! (in progress)',
             description: `Click the ${specialEmoji} reaction as fast as you can. The **first ${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.`,
         };
         // prettier-ignore
-        let embed3 = {
+        let embed4 = {
             title: 'Reaction test! (complete)',
             description: `Here's **${firstUsers == 1 ? `the first person` : `a list of the ${firstUsers} people`}** who reacted before anyone else${firstUsers != 1 ? ', in the order of how fast they responded' : ''}:`,
             fields: [],
@@ -93,11 +101,12 @@ client.on('interactionCreate', async (interaction) => {
                 }
                 forLoopDone = true;
 
+                await msg.edit({ embeds: [embed2] });
                 setTimeout(async function () {
                     await msg.edit({
-                        embeds: [embed2],
+                        embeds: [embed3],
                     });
-                }, 1000);
+                }, delay);
 
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
@@ -126,7 +135,7 @@ client.on('interactionCreate', async (interaction) => {
                         msg.reactions.removeAll();
                     }
                     msg.edit({
-                        embeds: [embed3],
+                        embeds: [embed4],
                     });
                 });
             });
