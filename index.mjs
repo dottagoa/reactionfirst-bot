@@ -53,24 +53,27 @@ client.on('interactionCreate', async (interaction) => {
 
         // -- EMBEDS -- //
         let embed1 = {
-            title: 'Reaction test! (preprocessing)',
-            description: "**PLEASE WAIT!** I'm adding the reactions, then I'll show you the emoji to choose!",
+            title: 'Preparing reaction test!',
+            description: 'Please wait.',
+            color: 'RANDOM',
+        };
+        let embed2 = {
+            title: 'Get ready to react...',
+            description: 'If you react before an emoji is chosen, you will be disqualified!',
+            color: 'RANDOM',
         };
         // prettier-ignore
-        let embed2 = {
-            title: 'GET READY TO REACT!',
-            description: "Selecting main emoji, get ready to react! **__If you react while I'm choosing, you'll be disqualified this round!__**"
-        }
-        // prettier-ignore
         let embed3 = {
-            title: 'Reaction test! (in progress)',
+            title: 'Reaction test in progress!',
             description: `Click the ${specialEmoji} reaction as fast as you can. The **first ${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.`,
+            color: 'RANDOM',
         };
         // prettier-ignore
         let embed4 = {
-            title: 'Reaction test! (complete)',
+            title: 'Reaction test complete!',
             description: `Here's **${firstUsers == 1 ? `the first person` : `a list of the ${firstUsers} people`}** who reacted before anyone else${firstUsers != 1 ? ', in the order of how fast they responded' : ''}:`,
             fields: [],
+            color: 'RANDOM',
         };
 
         // -- INITIAL MESSAGE -- //
@@ -99,14 +102,15 @@ client.on('interactionCreate', async (interaction) => {
                 for (let r = 0; r < emoti.length; r++) {
                     await msg.react(emoti[r]);
                 }
-                forLoopDone = true;
 
-                await msg.edit({ embeds: [embed2] });
                 setTimeout(async function () {
                     await msg.edit({
-                        embeds: [embed3],
+                        embeds: [embed2],
                     });
                 }, delay);
+                forLoopDone = true;
+
+                msg.edit({ embeds: [embed3] });
 
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
@@ -131,7 +135,7 @@ client.on('interactionCreate', async (interaction) => {
                             value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
                         });
                     if (coolUsers.length == 0 || coolUsers.length == 0) {
-                        embed3.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
+                        embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
                         msg.reactions.removeAll();
                     }
                     msg.edit({
