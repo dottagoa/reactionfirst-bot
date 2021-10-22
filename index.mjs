@@ -24,7 +24,7 @@ client.on('interactionCreate', async (interaction) => {
 
     if (commandName === 'firstreaction') {
         // -- USER VARIABLES -- //
-        const time = 10000; // time for reactions to be collected before timing out
+        const time = 10000; // time for reactions to be collected before timing out (in ms)
         const emojiList = ['🔴', '🟠', '🟡', '🟢', '🔵', '🟣']; // emojis to use for reactions
 
         // -- ARGUMENTS -- //
@@ -44,9 +44,9 @@ client.on('interactionCreate', async (interaction) => {
         // -- APPLICATION CONSTANTS -- //
         const min = 1; // minimum time IN FULL SECONDS
         const max = 3; // maximum time IN FULL SECONDS
-        const delay = (Math.random() * (max - min) + min) * 1000; // delay in milliseconds
+        const delay = (Math.random() * (max - min) + min) * 1000; // delay in milliseconds between min and max
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
-        const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
+        const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors to react with
         const coolUsers = [];
         const terribleUsers = [];
         const reactTimes = [];
@@ -112,10 +112,9 @@ client.on('interactionCreate', async (interaction) => {
                 forLoopDone = true;
 
                 const collector = await msg.createReactionCollector({ time: 13000 });
-                const scheduledTime = await Date.now();
                 collector.on('collect', (reaction, user) => {
                     if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                        reactTimes.push(Date.now() - scheduledTime);
+                        reactTimes.push(Date.now() - reaction.users.cache.get(user.id).createdTimestamp);
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
