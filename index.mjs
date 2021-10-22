@@ -15,12 +15,6 @@ client.once('ready', () => {
     console.log(`Ready! Logged in as ${client.user.username}#${client.user.discriminator}`);
 });
 
-client.on('messageReactionAdd', async (reaction, user) => {
-    if (user.bot) return;
-    if (forLoopDone == true) return;
-    terribleUsers.push(user);
-});
-
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
 
@@ -140,4 +134,9 @@ client.on('interactionCreate', async (interaction) => {
 
 let inProgress = false;
 let forLoopDone = true;
+client.on('messageReactionAdd', async (reaction, user) => {
+    if (user.bot) return;
+    if (forLoopDone == true) return;
+    terribleUsers.push(user);
+});
 client.login(TOKEN);
