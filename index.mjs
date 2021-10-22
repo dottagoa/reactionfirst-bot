@@ -110,7 +110,7 @@ client.on('interactionCreate', async (interaction) => {
                 }, delay);
                 forLoopDone = true;
 
-                msg.edit({ embeds: [embed3] });
+                await msg.edit({ embeds: [embed3] });
 
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
