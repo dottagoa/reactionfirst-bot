@@ -103,14 +103,13 @@ client.on('interactionCreate', async (interaction) => {
                     await msg.react(emoti[r]);
                 }
 
+                await msg.edit({ embeds: [embed2] });
                 setTimeout(async function () {
                     await msg.edit({
-                        embeds: [embed2],
+                        embeds: [embed3],
                     });
                 }, delay);
                 forLoopDone = true;
-
-                await msg.edit({ embeds: [embed3] });
 
                 const collector = await msg.createReactionCollector({ time: 10000 });
                 const scheduledTime = Date.now();
