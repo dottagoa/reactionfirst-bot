@@ -114,9 +114,8 @@ client.on('interactionCreate', async (interaction) => {
                 const collector = await msg.createReactionCollector({ time: 13000 });
                 const scheduledTime = await Date.now();
                 collector.on('collect', (reaction, user) => {
-                    console.log(client.ws.ping);
                     if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                        reactTimes.push(scheduledTime - Date.now());
+                        reactTimes.push(Date.now() - scheduledTime);
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
