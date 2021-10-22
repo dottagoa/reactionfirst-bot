@@ -115,7 +115,7 @@ client.on('interactionCreate', async (interaction) => {
                 const scheduledTime = await Date.now();
                 collector.on('collect', (reaction, user) => {
                     if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                        reactTimes.push(Date.now() - scheduledTime);
+                        reactTimes.push(scheduledTime - Date.now());
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
