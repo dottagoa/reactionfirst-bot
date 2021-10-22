@@ -126,7 +126,7 @@ client.on('interactionCreate', async (interaction) => {
 
                     const fields = coolUsers.map((v, i) => `${i + 1}.) ${v.tag}`);
                     for (var i = 0; i != fields.length; ++i)
-                        embed3.fields.push({
+                        embed4.fields.push({
                             name: fields[i],
                             value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
                         });
