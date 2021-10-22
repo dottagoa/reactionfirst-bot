@@ -127,7 +127,7 @@ client.on('interactionCreate', async (interaction) => {
                     for (var i = 0; i != fields.length; ++i)
                         embed4.fields.push({
                             name: fields[i],
-                            value: `${ms(reactTimes[i], { long: true })}ms - ${coolUsers[i]}`,
+                            value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
                         });
                     if (coolUsers.length == 0 || coolUsers.length == 0) {
                         embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
