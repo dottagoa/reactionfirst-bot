@@ -108,11 +108,11 @@ client.on('interactionCreate', async (interaction) => {
                     await msg.edit({
                         embeds: [embed3],
                     });
+                    collector = await msg.createReactionCollector({ time: 13000 });
                     baseTime = Date.now();
                 }, delay);
                 forLoopDone = true;
 
-                const collector = await msg.createReactionCollector({ time: 13000 });
                 collector.on('collect', (reaction, user) => {
                     if (reaction.emoji.name == specialEmoji.toString() && ((!coolUsers.includes(user) && coolUsers.length < firstUsers) || !terribleUsers.includes(user))) {
                         reactTimes.push(Date.now() - baseTime);
@@ -146,5 +146,6 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 let forLoopDone = true;
+let collector;
 let baseTime = 0;
 client.login(TOKEN);
