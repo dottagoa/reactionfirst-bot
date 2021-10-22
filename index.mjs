@@ -18,7 +18,7 @@ client.once('ready', () => {
 client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) return;
     if (forLoopDone == true) return;
-    reaction.users.remove(user);
+    terribleUsers.push(user);
 });
 
 client.on('interactionCreate', async (interaction) => {
