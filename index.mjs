@@ -42,8 +42,8 @@ client.on('interactionCreate', async (interaction) => {
         }
 
         // -- APPLICATION CONSTANTS -- //
-        const min = 1; // minimum time IN SECONDS
-        const max = 3; // maximum time IN SECONDS
+        const min = 1; // minimum time IN FULL SECONDS
+        const max = 3; // maximum time IN FULL SECONDS
         const delay = (Math.random() * (max - min) + min) * 1000; // delay in milliseconds
         const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
         const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors
