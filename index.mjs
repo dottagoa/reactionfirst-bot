@@ -114,24 +114,20 @@ client.on('interactionCreate', async (interaction) => {
                 const collector = await msg.createReactionCollector({ time: 13000 });
                 collector.on('collect', (reaction, user) => {
                     if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                        reactTimes.push(Date.now() - reaction.users.cache.get(user.id).createdTimestamp);
+                        reactTimes.push(Date.getTime() - reaction.users.cache.get(user.id).createdTimestamp);
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user.id) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
                     }
                     if (coolUsers.length > reactionNum) collector.stop('Enough reactions obtained');
-                    console.log(client.ws.ping);
                 });
 
-                collector.on('end', (collector) => {
-                    console.log(`\nPeople who reacted correctly: ${coolUsers.length != 0 ? `${coolUsers.length}` : 'nobody!'}`);
-                    console.log(`People who reacted incorrectly: ${terribleUsers.length != 0 ? `${terribleUsers.length}` : 'nobody!'}\n`);
-
+                collector.on('end', (collector, reason) => {
                     const fields = coolUsers.map((v, i) => `${i + 1}.) ${v.tag}`);
                     for (var i = 0; i != fields.length; ++i)
                         embed4.fields.push({
                             name: fields[i],
-                            value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
+                            value: `${ms(reactTimes[i], { long: true })}ms - ${coolUsers[i]}`,
                         });
                     if (coolUsers.length == 0 || coolUsers.length == 0) {
                         embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
