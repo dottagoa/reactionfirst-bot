@@ -58,7 +58,7 @@ client.on('interactionCreate', async (interaction) => {
         // prettier-ignore
         let embed2 = {
             title: 'Reaction test! (in progress)',
-            description: `Click the ${specialEmoji} reaction as fast as you can. The first **${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.`,
+            description: `Click the ${specialEmoji} reaction as fast as you can. The **first ${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.`,
         };
         // prettier-ignore
         let embed3 = {
