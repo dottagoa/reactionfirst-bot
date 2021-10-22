@@ -118,7 +118,7 @@ client.on('interactionCreate', async (interaction) => {
                         reactTimes.push(baseTime - reaction.creationTime);
                         console.log(`${user.username} reacted with ${specialEmoji} in ${baseTime - reaction.creationTime}ms`);
                         console.log(baseTime);
-                        console.log(reaction.users.cache.get(user.id).creationTime);
+                        console.log(reaction.users.cache.get(user.id));
                         coolUsers.push(user);
                     } else if (reaction.emoji.name != specialEmoji.toString() && (!terribleUsers.includes(user.id) || !coolUsers.includes(user))) {
                         terribleUsers.push(user);
