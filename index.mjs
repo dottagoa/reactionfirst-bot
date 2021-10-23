@@ -120,7 +120,7 @@ client.on('interactionCreate', async (interaction) => {
                         console.log(baseTime);
                         console.log(reaction);
                         coolUsers.push(user);
-                    } else if (reaction.emoji.name != specialEmoji.toString() && (!terribleUsers.includes(user.id) || !coolUsers.includes(user))) {
+                    } else if (reaction.emoji.name != specialEmoji.toString() && (!terribleUsers.includes(user) || !coolUsers.includes(user))) {
                         terribleUsers.push(user);
                     }
                     if (coolUsers.length > reactionNum) collector.stop('Enough reactions obtained');
