@@ -65,7 +65,7 @@ client.on('interactionCreate', async (interaction) => {
         // prettier-ignore
         let embed3 = {
             title: 'Reaction test in progress!',
-            description: `Click the ${specialEmoji} reaction as fast as you can. The **first ${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.`,
+            description: `Click the ${specialEmoji} reaction as fast as you can.\n\nThe **first ${firstUsers == 1 ? `person` : `${firstUsers} people`}** to react will be seen below.\n\nIf you clicked a reaction before this prompt appeared, you're probably disqualified this round.`,
             color: 'RANDOM',
         };
         // prettier-ignore
