@@ -114,16 +114,13 @@ client.on('interactionCreate', async (interaction) => {
 
                 const collector = await msg.createReactionCollector({ time: 13000 });
                 collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name == specialEmoji.toString() && ((!coolUsers.includes(user) && coolUsers.length < firstUsers) || !terribleUsers.includes(user))) {
+                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
                         reactTimes.push(Date.now() - baseTime);
-                        console.log(`${user.username} reacted with ${specialEmoji} in ${Date.now() - baseTime}ms`);
-                        console.log(baseTime);
-                        console.log(reaction);
                         coolUsers.push(user);
-                    } else if (reaction.emoji.name != specialEmoji.toString() && (!terribleUsers.includes(user) || !coolUsers.includes(user))) {
+                    } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
                         terribleUsers.push(user);
                     }
-                    if (coolUsers.length > reactionNum) collector.stop('Enough reactions obtained');
+                    if (coolUsers.length >= reactionNum) collector.stop('Enough reactions obtained');
                 });
 
                 collector.on('end', (collector, reason) => {
