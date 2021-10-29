@@ -123,13 +123,23 @@ client.on('interactionCreate', async (interaction) => {
             });
         });
     } else if (commandName === 'eval') {
-        try {
-            const code = interaction.options.get('code').value;
-            const evaled = eval(code);
-            const clean = await utils.clean(evaled);
-            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
-        } catch (err) {
-            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
+        const { code } = interaction;
+        const { options } = interaction;
+        const { reply } = interaction;
+
+        const { user } = interaction.message;
+        const { guild } = interaction.message;
+
+        if (user.id !== '212957230251769858') return;
+
+        const result = eval(code);
+
+        if (result instanceof Promise) {
+            result.then((res) => {
+                reply(`Promise resolved with: \`${res}\``);
+            });
+        } else {
+            reply(`Result: \`${result}\``);
         }
     } else if (commandName === 'thankyou') {
         const tyembed = {
