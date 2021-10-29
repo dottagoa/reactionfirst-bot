@@ -18,12 +18,3 @@ export function shuffle(a) {
     }
     return a;
 }
-
-export async function stopCollection(result) {
-    collector.stop();
-
-    embed = {
-        title: 'Reaction Test Complete!',
-        description: "Here's a list of people who reacted, in order from who reacted first:",
-    };
-}
