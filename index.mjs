@@ -1,7 +1,7 @@
 import fs from 'fs';
 import ms from 'ms';
 import { Client, Collection, Intents, MessageEmbed } from 'discord.js';
-import * as util from './util.mjs';
+import * as utils from './utilities.mjs';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -45,8 +45,8 @@ client.on('interactionCreate', async (interaction) => {
         const min = 3; // minimum time IN FULL SECONDS
         const max = 7; // maximum time IN FULL SECONDS
         const delay = (Math.random() * (max - min) + min) * 1000; // delay in milliseconds between min and max
-        const emoti = util.getRandom(emojiList, reactionNum); // get random emojis from the list above
-        const specialEmoji = util.getRandom(emoti, 1); // choose single emoji for first reactors to react with
+        const emoti = utils.getRandom(emojiList, reactionNum); // get random emojis from the list above
+        const specialEmoji = utils.getRandom(emoti, 1); // choose single emoji for first reactors to react with
         const coolUsers = [];
         const terribleUsers = [];
         const reactTimes = [];
@@ -143,7 +143,7 @@ client.on('interactionCreate', async (interaction) => {
             const clean = await client.clean(client, evaled);
             interaction.reply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
         } catch (err) {
-            interaction.reply({ content: `\`ERROR\` \`\`\`xl\n${await util.clean(client, err)}\n\`\`\`` });
+            interaction.reply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
         }
     }
 });

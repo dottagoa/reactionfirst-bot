@@ -1,5 +1,5 @@
 const { TOKEN } = process.env;
-import inspect from 'util';
+import * as util from 'util';
 
 export function getRandom(arr, n) {
     var result = new Array(n),
@@ -24,7 +24,7 @@ export function shuffle(a) {
 
 export async function clean(text) {
     if (text && text.constructor.name == 'Promise') text = await text;
-    if (typeof evaled !== 'string') text = inspect(text, { depth: 0 });
+    if (typeof evaled !== 'string') text = util.inspect(text, { depth: 0 });
 
     text = text
         .replace(/`/g, '`' + String.fromCharCode(8203))
