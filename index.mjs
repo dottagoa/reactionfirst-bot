@@ -128,9 +128,9 @@ client.on('interactionCreate', async (interaction) => {
             const code = interaction.options.get('code').value;
             const evaled = eval(code);
             const clean = await client.clean(client, evaled);
-            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
+            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\``, ephemeral: false });
         } catch (err) {
-            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
+            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\``, ephemeral: false });
         }
     }
 });
