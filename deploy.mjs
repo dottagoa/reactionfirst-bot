@@ -22,5 +22,8 @@ const commands = [
 
 const rest = new REST({ version: '9' }).setToken(TOKEN);
 rest.put(Routes.applicationCommands(CLIENTID), { body: commands })
-    .then(() => console.log('Successfully registered application commands.'))
+    .then(() => {
+        console.log('Successfully registered application commands.');
+        console.log(rest.get(Routes.applicationCommands(CLIENTID)).then((response) => response.body));
+    })
     .catch(console.error);
