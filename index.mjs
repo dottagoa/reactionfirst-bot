@@ -133,7 +133,7 @@ client.on('interactionCreate', async (interaction) => {
         }
     } else if (commandName === 'thankyou') {
         const tyembed = {
-            name: 'From both me and rhearmas to you, SoundDrout...',
+            title: 'From both me and rhearmas to you, SoundDrout...',
             description: '💜 Thank You! 💜',
             color: '0xffaaaa',
         };
