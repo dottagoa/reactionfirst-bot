@@ -13,6 +13,10 @@ const commands = [
         .setDescription('Sends an embed that gathers a random reaction. Then shows the first few users who reacted.')
         .addIntegerOption((option) => option.setName('reactions').setDescription('Amount of reactions to add.').setRequired(true))
         .addIntegerOption((option) => option.setName('usercount').setDescription('Number of first reactors to display.').setRequired(true)),
+    new SlashCommandBuilder()
+        .setName('eval')
+        .setDescription('Evaluates a given code.')
+        .addStringOption((option) => option.setName('code').setDescription('Code to evaluate.').setRequired(true)),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(TOKEN);

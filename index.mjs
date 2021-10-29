@@ -93,52 +93,53 @@ client.on('interactionCreate', async (interaction) => {
             terribleUsers.push(user);
         });
 
-        const message = await interaction
-            .editReply({
-                embeds: [embed1],
-            })
-            .then(async (msg) => {
-                forLoopDone = false;
-                for (let r = 0; r < emoti.length; r++) {
-                    await msg.react(emoti[r]);
-                }
+        const message = await interaction.editReply({ embeds: [embed1] }).then(async (msg) => {
+            forLoopDone = false;
+            for (let r = 0; r < emoti.length; r++) {
+                await msg.react(emoti[r]);
+            }
 
-                await msg.edit({ embeds: [embed2] });
-                setTimeout(async function () {
-                    await msg.edit({
-                        embeds: [embed3],
-                    });
-                    baseTime = Date.now();
-                }, delay);
-                forLoopDone = true;
-
-                const collector = await msg.createReactionCollector({ time: 13000 });
-                collector.on('collect', (reaction, user) => {
-                    if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                        reactTimes.push(Date.now() - baseTime);
-                        coolUsers.push(user);
-                    } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
-                        terribleUsers.push(user);
-                    }
-                    if (coolUsers.length >= reactionNum) collector.stop('Enough reactions obtained');
+            await msg.edit({ embeds: [embed2] });
+            setTimeout(async function () {
+                await msg.edit({
+                    embeds: [embed3],
                 });
+                baseTime = Date.now();
+            }, delay);
+            forLoopDone = true;
 
-                collector.on('end', (collector, reason) => {
-                    const fields = coolUsers.map((v, i) => `${i + 1}.) ${v.tag}`);
-                    for (var i = 0; i != fields.length; ++i)
-                        embed4.fields.push({
-                            name: fields[i],
-                            value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
-                        });
-                    if (coolUsers.length == 0 || coolUsers.length == 0) {
-                        embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
-                        msg.reactions.removeAll();
-                    }
-                    msg.edit({
-                        embeds: [embed4],
+            const collector = await msg.createReactionCollector({ time: 13000 });
+            collector.on('collect', (reaction, user) => {
+                if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
+                    reactTimes.push(Date.now() - baseTime);
+                    coolUsers.push(user);
+                } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
+                    terribleUsers.push(user);
+                }
+                if (coolUsers.length >= reactionNum) collector.stop('Enough reactions obtained');
+            });
+
+            collector.on('end', (collector, reason) => {
+                const fields = coolUsers.map((v, i) => `${i + 1}.) ${v.tag}`);
+                for (var i = 0; i != fields.length; ++i)
+                    embed4.fields.push({
+                        name: fields[i],
+                        value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
                     });
+                if (coolUsers.length == 0 || coolUsers.length == 0) {
+                    embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
+                    msg.reactions.removeAll();
+                }
+                msg.edit({
+                    embeds: [embed4],
                 });
             });
+        });
+    }
+    if (command === 'eval') {
+        const code = interaction.options.get('code').value;
+        const evaled = util.eval(code);
+        interaction.reply({ content: evaled });
     }
 });
 
