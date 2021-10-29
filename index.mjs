@@ -32,8 +32,8 @@ client.on('interactionCreate', async (interaction) => {
         const firstUsers = interaction.options.get('usercount').value; // argument: first X users to show
 
         // -- VARIABLE CHECKS -- //
-        if (reactionNum === 0) return interaction.editReply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
-        if (firstUsers === 0) return interaction.editReply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
+        if (reactionNum < 1) return interaction.editReply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
+        if (firstUsers < 1) return interaction.editReply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
         if (reactionNum >= emojiList.length) return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
 
         // -- APPLICATION CONSTANTS -- //
@@ -128,9 +128,9 @@ client.on('interactionCreate', async (interaction) => {
             const code = interaction.options.get('code').value;
             const evaled = eval(code);
             const clean = await client.clean(client, evaled);
-            interaction.reply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
+            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
         } catch (err) {
-            interaction.reply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
+            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
         }
     }
 });
