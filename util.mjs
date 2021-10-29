@@ -1,5 +1,5 @@
 const { TOKEN } = process.env;
-import inspect from util;
+import inspect from 'util';
 
 export function getRandom(arr, n) {
     var result = new Array(n),
