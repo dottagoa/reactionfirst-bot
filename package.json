@@ -8,6 +8,6 @@
         "ms": "^2.1.3"
     },
     "scripts": {
-        "start": "node index.mjs"
+        "start": "node deploy.mjs && node index.mjs"
     }
 }
