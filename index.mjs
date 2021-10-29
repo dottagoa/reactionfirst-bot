@@ -32,14 +32,9 @@ client.on('interactionCreate', async (interaction) => {
         const firstUsers = interaction.options.get('usercount').value; // argument: first X users to show
 
         // -- VARIABLE CHECKS -- //
-        if (reactionNum === 0) {
-            inProgress = false;
-            return interaction.edit({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
-        }
-        if (firstUsers === 0) {
-            inProgress = false;
-            return interaction.edit({ content: 'You must specify at least one user that has to react!', ephemeral: true });
-        }
+        if (reactionNum === 0) return interaction.editReply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
+        if (firstUsers === 0) return interaction.editReply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
+        if (reactionNum >= emojiList.length) return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
 
         // -- APPLICATION CONSTANTS -- //
         const min = 3; // minimum time IN FULL SECONDS
@@ -75,13 +70,6 @@ client.on('interactionCreate', async (interaction) => {
             fields: [],
             color: 'RANDOM',
         };
-
-        // -- INITIAL MESSAGE -- //
-        if (reactionNum >= emojiList.length)
-            return interaction.edit({
-                content: 'Your reaction count is larger than the amount of available emojis!',
-                ephemeral: true,
-            });
 
         const filter = (reaction, user) => {
             return reaction.emoji.name === specialEmoji.toString();
