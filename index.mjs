@@ -136,9 +136,9 @@ client.on('interactionCreate', async (interaction) => {
             });
         });
     }
-    if (command === 'eval') {
+    if (commandName === 'eval') {
         const code = interaction.options.get('code').value;
-        const evaled = util.eval(code);
+        const evaled = eval(code);
         interaction.reply({ content: evaled });
     }
 });
