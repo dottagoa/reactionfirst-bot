@@ -17,7 +17,7 @@ const commands = [
         .setName('eval')
         .setDescription('Evaluates a given code.')
         .addStringOption((option) => option.setName('code').setDescription('Code to evaluate.').setRequired(true)),
-    new SlashCommandBuilder().setName('thankyou'),
+    new SlashCommandBuilder().setName('thankyou').setDescription('Sends a thank you message.'),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(TOKEN);
