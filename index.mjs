@@ -99,7 +99,6 @@ client.on('interactionCreate', async (interaction) => {
             const collector = await msg.createReactionCollector({ time: 13000 });
             collector.on('collect', (reaction, user) => {
                 if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
-                    reactTimes.push(Date.now() - baseTime);
                     coolUsers.push(user);
                 } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
                     terribleUsers.push(user);
@@ -112,7 +111,7 @@ client.on('interactionCreate', async (interaction) => {
                 for (var i = 0; i != fields.length; ++i)
                     embed4.fields.push({
                         name: fields[i],
-                        value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
+                        value: `${coolUsers[i]}`,
                     });
                 if (coolUsers.length == 0) {
                     embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
