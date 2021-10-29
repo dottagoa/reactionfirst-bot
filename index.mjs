@@ -137,7 +137,7 @@ client.on('interactionCreate', async (interaction) => {
             description: '💜 Thank You! 💜',
             color: '0xffaaaa',
         };
-        interaction.reply({ embeds: [tyembed] });
+        interaction.editReply({ embeds: [tyembed] });
     }
 });
 
