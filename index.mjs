@@ -134,13 +134,13 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-function thanksSound() {
+function thanksSound(location) {
     const tyembed = {
         title: 'From both me and rhearmas to you, SoundDrout...',
         description: '💜 Thank You! 💜',
         color: '0xffaaaa',
     };
-    interaction.reply({ embeds: [tyembed] });
+    location.send({ embeds: [tyembed] });
 }
 
 let forLoopDone = true;
