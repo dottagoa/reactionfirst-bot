@@ -20,7 +20,7 @@ client.on('interactionCreate', async (interaction) => {
 
     const { commandName } = interaction;
 
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply();
 
     if (commandName === 'firstreaction') {
         // -- USER VARIABLES -- //
@@ -128,9 +128,9 @@ client.on('interactionCreate', async (interaction) => {
             const code = interaction.options.get('code').value;
             const evaled = eval(code);
             const clean = await utils.clean(evaled);
-            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\``, ephemeral: false });
+            interaction.editReply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
         } catch (err) {
-            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\``, ephemeral: false });
+            interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
         }
     }
 });
