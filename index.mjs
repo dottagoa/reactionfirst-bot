@@ -123,12 +123,8 @@ client.on('interactionCreate', async (interaction) => {
             });
         });
     } else if (commandName === 'eval') {
-        const { code } = interaction;
-        const { options } = interaction;
-        const { reply } = interaction;
-
-        const { user } = interaction.message;
-        const { guild } = interaction.message;
+        const { code } = interaction.options.get('code').value;
+        const { user } = interaction.message.author;
 
         if (user.id !== '212957230251769858') return;
 
@@ -136,10 +132,10 @@ client.on('interactionCreate', async (interaction) => {
 
         if (result instanceof Promise) {
             result.then((res) => {
-                reply(`Promise resolved with: \`${res}\``);
+                editReply(`Promise resolved with: \`${res}\``);
             });
         } else {
-            reply(`Result: \`${result}\``);
+            editReply(`Result: \`${result}\``);
         }
     } else if (commandName === 'thankyou') {
         const tyembed = {
