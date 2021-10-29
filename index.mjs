@@ -104,7 +104,7 @@ client.on('interactionCreate', async (interaction) => {
                 } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
                     terribleUsers.push(user);
                 }
-                if (coolUsers.length >= reactionNum) collector.stop('Enough reactions obtained');
+                // if (coolUsers.length >= reactionNum) collector.stop('Enough reactions obtained');
             });
 
             collector.on('end', (collector, reason) => {
@@ -114,7 +114,7 @@ client.on('interactionCreate', async (interaction) => {
                         name: fields[i],
                         value: `${reactTimes[i]}ms - ${coolUsers[i]}`,
                     });
-                if (coolUsers.length == 0 || coolUsers.length == 0) {
+                if (coolUsers.length == 0) {
                     embed4.description = `Nobody reacted ${coolUsers.length == 0 ? 'correctly ' : ''}within the allotted time!`;
                     msg.reactions.removeAll();
                 }
