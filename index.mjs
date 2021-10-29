@@ -137,9 +137,14 @@ client.on('interactionCreate', async (interaction) => {
         });
     }
     if (commandName === 'eval') {
-        const code = interaction.options.get('code').value;
-        const evaled = eval(code);
-        interaction.reply({ content: evaled });
+        try {
+            const code = interaction.options.get('code').value;
+            const evaled = eval(code);
+            const clean = await client.clean(client, evaled);
+            interaction.reply({ content: `\`\`\`js\n${clean}\n\`\`\`` });
+        } catch (err) {
+            interaction.reply({ content: `\`ERROR\` \`\`\`xl\n${await util.clean(client, err)}\n\`\`\`` });
+        }
     }
 });
 
