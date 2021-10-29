@@ -20,7 +20,7 @@ client.on('interactionCreate', async (interaction) => {
 
     const { commandName } = interaction;
 
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: true });
 
     if (commandName === 'firstreaction') {
         // -- USER VARIABLES -- //
@@ -34,11 +34,11 @@ client.on('interactionCreate', async (interaction) => {
         // -- VARIABLE CHECKS -- //
         if (reactionNum === 0) {
             inProgress = false;
-            return interaction.reply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
+            return interaction.edit({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
         }
         if (firstUsers === 0) {
             inProgress = false;
-            return interaction.reply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
+            return interaction.edit({ content: 'You must specify at least one user that has to react!', ephemeral: true });
         }
 
         // -- APPLICATION CONSTANTS -- //
@@ -78,7 +78,7 @@ client.on('interactionCreate', async (interaction) => {
 
         // -- INITIAL MESSAGE -- //
         if (reactionNum >= emojiList.length)
-            return interaction.reply({
+            return interaction.edit({
                 content: 'Your reaction count is larger than the amount of available emojis!',
                 ephemeral: true,
             });
@@ -135,8 +135,7 @@ client.on('interactionCreate', async (interaction) => {
                 });
             });
         });
-    }
-    if (commandName === 'eval') {
+    } else if (commandName === 'eval') {
         try {
             const code = interaction.options.get('code').value;
             const evaled = eval(code);
