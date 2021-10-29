@@ -131,6 +131,13 @@ client.on('interactionCreate', async (interaction) => {
         } catch (err) {
             interaction.editReply({ content: `\`ERROR\` \`\`\`xl\n${await utils.clean(client, err)}\n\`\`\`` });
         }
+    } else if (commandName === 'thankyou') {
+        const tyembed = {
+            name: 'From both me and rhearmas to you, SoundDrout...',
+            description: '💜 Thank You! 💜',
+            color: '0xffaaaa',
+        };
+        interaction.reply({ embeds: [tyembed] });
     }
 });
 
