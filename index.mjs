@@ -81,7 +81,7 @@ client.on('interactionCreate', async (interaction) => {
             terribleUsers.push(user);
         });
 
-        const message = await interaction.editReply({ embeds: [embed1] }).then(async (msg) => {
+        await interaction.editReply({ embeds: [embed1] }).then(async (msg) => {
             forLoopDone = false;
             for (let r = 0; r < emoti.length; r++) {
                 await msg.react(emoti[r]);
