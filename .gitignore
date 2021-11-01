@@ -10,3 +10,6 @@ config.*
 
 # DS Store
 .DS_Store
+
+# Markdown lint file
+.markdownlint.json
