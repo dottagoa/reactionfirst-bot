@@ -30,7 +30,7 @@ With that out of the way, we've got it set up. Let's get the code environment pr
 
 ## 1) Install git and Node
 
--   Windows users should install and use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) and should also **follow the Linux instructions.**
+-   Windows users should **install and use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install)** and follow the Linux instructions based on the distribution being used.
 
 -   **macOS users can use [Homebrew](https://brew.sh)** to install both Git _and_ Node:
 
