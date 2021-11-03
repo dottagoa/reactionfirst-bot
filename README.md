@@ -106,42 +106,45 @@ If you get an error showing the file was not found, make sure you're in the righ
 
 # FAQ
 
-## #1: Why should I never share my token?
+## Why should I never share my token?
 
 The token is the main thing that lets you use your bot. If someone took the token used for your bot, they can use it to abuse the permissions that it has, especially if you make it an administrator.
 
-## #2: Running `index.mjs` told me the file couldn't be found!
+## Running `index.mjs` told me the file couldn't be found!
 
 You need to be in the folder that has all the bot code.
 
-## #3: Running `deploy.mjs` didn't register the commands!
+## `index.js` said that the file `.env` wasn't found!
+You most likely didn't remove the `.txt` extension from the file. [Enable file extensions in Explorer](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and then rename the file, removing the `.txt` at the end.
+
+## Running `deploy.mjs` didn't register the commands!
 
 Follow step 3 and read the instructions more carefully.
 
-## #4: The bot said an invalid token was provided!
+## The bot said an invalid token was provided!
 
-See faq 3.
+Re-read step 3.
 
-## #5: I got an invalid module error when running one of the files!
+## I got an invalid module error when running one of the files!
 
 Re-read step 2.
 
-## #6: Why is this project considered public domain?
+## Why is this project considered public domain?
 
 I want to provide aspiring Discord bot developers valuable resources for some of the most common functions in JavaScript. I don't care if you use this project for whatever you desire.
 
-## #7: I want to contribute to this project!
+## I want to contribute to this project!
 
 This repository won't accept merge requests unless it is a major security flaw or a highly-wanted feature that isn't ready for the master branch. Fork the project and make your own spin on it.
 
-## #8: I have another problem that isn't answered!
+## I have another problem that isn't answered!
 
 Post an issue on this repository's issue tracker. You need a GitLab account to do so.
 
-## #9: Will you respond to pull request sand merge request on GitHub?
+## Will you respond to pull requests and merge request on GitHub?
 
 No.
 
 # Obligatory License Disclaimer
 
-This project has no license, silly! It's published in the **public domain**, which means you can use this code however the heck you want to. No need to credit me or anything like that. If you're unsure, view the license file above.
+This project has no license, silly! It's published with The Unlisence, which means you can use this code however the heck you want to. No need to credit me or anything like that. If you're unsure, view LICENSE.
