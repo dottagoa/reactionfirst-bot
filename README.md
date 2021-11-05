@@ -115,6 +115,7 @@ The token is the main thing that lets you use your bot. If someone took the toke
 You need to be in the folder that has all the bot code.
 
 ## `index.js` said that the file `.env` wasn't found!
+
 You most likely didn't remove the `.txt` extension from the file. [Enable file extensions in Explorer](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and then rename the file, removing the `.txt` at the end.
 
 ## Running `deploy.mjs` didn't register the commands!
