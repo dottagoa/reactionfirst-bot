@@ -12,7 +12,7 @@ It's recommended to use Linux or macOS because of the better support for git and
 
 Before we even install anything, we need to create the bot application. Go to [Discord's developer page](https://discord.com/developers), sign into your Discord account, and create an application. The button will be located at the top right of the webpage next to your user icon.
 
-Firstly, we need to invite the bot to the server. In the General Information tab on the left, copy the Client ID. This is a public ID and you can freely share it with others, since there is no adverse damage to sharing it.
+With our new bot application set up, we need to invite the bot to the server. In the General Information tab on the left, copy the Client ID. This is a public ID and you can freely share it with others, since there is no adverse damage to sharing it.
 
 Next, click on the **Bot** tab button on the left side of the screen and make a bot application. It will inherit the icon and name of the main application by default, but you can always change it later.
 
@@ -39,7 +39,7 @@ With that out of the way, we've got it set up. Let's get the code environment pr
 brew install git nodejs
 ```
 
--   **Linux users can use their favourite package manager**. On many distros, the packages are named `git` and `nodejs`. For example, if you are on Ubuntu or Debian, you can install these packages with:
+-   **Linux users can use their favourite package manager**. On many distros, the packages are named `git` and `nodejs`. For example, if you are on Ubuntu or Debian, you can install these packages with `apt`:
 
 ```sh
 # Ubuntu/Debian
@@ -48,11 +48,11 @@ sudo apt install git nodejs
 
 ## 2) Clone repository and install node packages
 
-Open up your terminal if you haven't already. Run the following shell command inside the folder you want to clone the repository into:
+In your terminal, run the following inside the folder you want to clone the repository into:
 
 ```sh
 # Clone this repository and enter the directory for it. The && is there to prevent you from entering a nonexistent directory in case the clone fails.
-git clone https://gitlab.com/rhearmas/reactionfirst-bot && cd reactionfirst-bot
+git clone https://gitlab.com/boxsupremacy/reactionfirst-bot && cd reactionfirst-bot
 ```
 
 Now, install all the node modules using `yarn`:
@@ -114,7 +114,7 @@ The token is the main thing that lets you use your bot. If someone took the toke
 
 You need to be in the folder that has all the bot code.
 
-## `index.js` said that the file `.env` wasn't found!
+## `index.mjs` said that the file `.env` wasn't found!
 
 You most likely didn't remove the `.txt` extension from the file. [Enable file extensions in Explorer](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and then rename the file, removing the `.txt` at the end.
 
@@ -144,8 +144,8 @@ Post an issue on this repository's issue tracker. You need a GitLab account to d
 
 ## Will you respond to pull requests and merge request on GitHub?
 
-No.
+Unless it is a major security vulnerability, no.
 
 # Obligatory License Disclaimer
 
-This project has no license, silly! It's published with The Unlisence, which means you can use this code however the heck you want to. No need to credit me or anything like that. If you're unsure, view LICENSE.
+This project has no license, silly! It's published with The Unlicense, which means you can use this code however the heck you want to. No need to credit me or anything like that. If you're unsure, view the LICENSE file.
