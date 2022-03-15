@@ -159,7 +159,11 @@ Unless it is a major security vulnerability, no.
 
 Install them. You can click on the blue text if it asks for anything to be installed.
 
-### I have another problem that isn't answered!
+### Visual Studio Code gives me errors in the .env file!
+
+Install the [DotENV syntax support](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) extension.
+
+## I have another problem that isn't answered!
 
 Post an issue on this repository's issue tracker. You need a GitHub account to do so.
 
