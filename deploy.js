@@ -1,9 +1,8 @@
-import { readdirSync } from 'fs';
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v9';
-import { SlashCommandBuilder } from '@discordjs/builders';
+const { REST } = require('@discordjs/rest'),
+    { Routes } = require('discord-apt-types/v9'),
+    { SlashCommandBuilder } = require('@discordjs/builders');
 
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 const { TOKEN, CLIENTID } = process.env;
 

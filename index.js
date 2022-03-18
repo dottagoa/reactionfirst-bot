@@ -1,9 +1,9 @@
-import fs from 'fs';
-import ms from 'ms';
-import { Client, Collection, Intents, MessageEmbed } from 'discord.js';
-import * as utils from './utilities.mjs';
+const fs = require('fs'),
+    ms = require('ms'),
+    { Client, Intents, MessageEmbed } = require('discord.js'),
+    utils = require('./utilities.js');
 
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 const { TOKEN } = process.env;
 
@@ -34,7 +34,8 @@ client.on('interactionCreate', async (interaction) => {
         // -- VARIABLE CHECKS -- //
         if (reactionNum < 1) return interaction.editReply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
         if (firstUsers < 1) return interaction.editReply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
-        if (reactionNum > emojiList.length) return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
+        if (reactionNum > emojiList.length)
+            return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
 
         // -- APPLICATION CONSTANTS -- //
         const min = 3; // minimum time IN FULL SECONDS
@@ -98,7 +99,12 @@ client.on('interactionCreate', async (interaction) => {
 
             const collector = await msg.createReactionCollector({ time: 13000 });
             collector.on('collect', (reaction, user) => {
-                if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(user) && coolUsers.length < firstUsers && !terribleUsers.includes(user)) {
+                if (
+                    reaction.emoji.name == specialEmoji.toString() &&
+                    !coolUsers.includes(user) &&
+                    coolUsers.length < firstUsers &&
+                    !terribleUsers.includes(user)
+                ) {
                     coolUsers.push(user);
                 } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
                     terribleUsers.push(user);
