@@ -6,6 +6,8 @@ Discord.js bot which allows users to add several reactions to an embed and list 
 
 It's recommended to use Linux or macOS because of the better support for git and node that it has. However, if you are on Windows, **install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install)**.
 
+## **MAKE SURE YOU HAVE READ ALL THE STEPS LISTED HERE WHILE SETTING UP THE BOT. ONE MISSED STEP WILL RETURN ERRORS.**
+
 ### 0) Set up the bot
 
 Before we even install anything, we need to create the bot application. Go to [Discord's developer page](https://discord.com/developers), sign into your Discord account, and create an application. The button will be located at the top right of the webpage next to your user icon:
