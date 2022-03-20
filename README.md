@@ -99,7 +99,7 @@ CLIENTID=bot-user-id
 All we have to do now is get the bot running. Since this is the first time we're running the bot, we need to deploy the slash commands:
 
 ```sh
-node deploy.mjs
+node deploy.js
 ```
 
 If you get a line saying `Registered application commands`, then you're all set. If not, check to make sure your configuration files are set up properly.
@@ -111,7 +111,7 @@ Every time you make a new slash command, you need to re-run this file to add it.
 The moment you've been waiting for - getting the bot up and running. Every time you need to run the bot, enter the folder that the bot is in and run this command:
 
 ```sh
-node index.mjs
+node index.js
 ```
 
 If you get an error showing the file was not found, make sure you're in the right folder. Do your research if you need to fix it.
@@ -122,15 +122,15 @@ If you get an error showing the file was not found, make sure you're in the righ
 
 If someone got their hands on your bot token, they can use it to abuse the permissions that it has, especially if you make it an administrator.
 
-### Running `index.mjs` told me the file couldn't be found
+### Running `index.js` told me the file couldn't be found
 
 You need to be in the folder that has all the bot code.
 
-### `index.mjs` said that the file `.env` wasn't found
+### `index.js` said that the file `.env` wasn't found
 
 You most likely didn't remove the `.txt` extension from the file. [Enable file extensions in Explorer](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and then rename the file, removing the `.txt` at the end.
 
-### Running `deploy.mjs` didn't register the commands
+### Running `deploy.js` didn't register the commands
 
 Follow step 3 and read the instructions more carefully.
 
