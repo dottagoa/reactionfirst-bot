@@ -2,6 +2,8 @@
 
 Discord.js bot which allows users to add several reactions to an embed and list the first few people who choose a randomly selected reaction. As seen in SoundDrout's event video published on YouTube. If you have problems, view the FAQ below.
 
+## I've moved all the deployment instructions to the [wiki](https://github.com/boxsux/reactionfirst-bot/wiki). There's guides there for both local deployment and Railway setup.
+
 ## Deployment instructions
 
 It's recommended to use Linux or macOS because of the better support for git and node that it has. However, if you are on Windows, **install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install)**.
