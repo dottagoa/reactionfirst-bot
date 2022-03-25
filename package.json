@@ -1,4 +1,7 @@
 {
+    "name": "Reactionator 5000",
+    "description": "Discord bot to get the first few users who react to a message."
+    "license": "The Unlicense",
     "dependencies": {
         "@discordjs/builders": "^0.6.0",
         "@discordjs/rest": "^0.1.0-canary.0",
@@ -8,6 +11,6 @@
         "ms": "^2.1.3"
     },
     "scripts": {
-        "start": "node index.mjs"
+        "start": "node deploy.js && node index.js"
     }
 }
