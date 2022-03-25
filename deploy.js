@@ -1,5 +1,5 @@
 const { REST } = require('@discordjs/rest'),
-    { Routes } = require('discord-apt-types/v9'),
+    { Routes } = require('discord-api-types/v9'),
     { SlashCommandBuilder } = require('@discordjs/builders');
 
 const dotenv = require('dotenv');
