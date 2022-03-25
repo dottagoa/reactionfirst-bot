@@ -2,6 +2,10 @@
     "name": "Reactionator 5000",
     "description": "Discord bot to get the first few users who react to a message.",
     "license": "The Unlicense",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Box Supremacy",
+    "keywords": [],
     "dependencies": {
         "@discordjs/builders": "^0.6.0",
         "@discordjs/rest": "^0.1.0-canary.0",
