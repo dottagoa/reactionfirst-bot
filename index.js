@@ -1,8 +1,3 @@
-const { Stopwatch } = require('@sapphire/stopwatch'),
-    { Type } = require('@sapphire/type'),
-    { codeBlock } = require('@sapphire/utilities'),
-    { inspect } = require('util');
-
 require('dotenv').config();
 const { TOKEN } = process.env;
 
@@ -50,8 +45,7 @@ client.on('interactionCreate', async (interaction) => {
         // -- VARIABLE CHECKS -- //
         if (reactionNum < 1) return interaction.editReply({ content: 'I need to be able to react with at least one emoji!', ephemeral: true });
         if (firstUsers < 1) return interaction.editReply({ content: 'You must specify at least one user that has to react!', ephemeral: true });
-        if (reactionNum > emojiList.length)
-            return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
+        if (reactionNum > emojiList.length) return interaction.editReply({ content: 'Your reaction count is larger than the amount of available emojis!', ephemeral: true });
 
         // -- APPLICATION CONSTANTS -- //
         const min = 3; // minimum time IN FULL SECONDS
@@ -136,21 +130,12 @@ client.on('interactionCreate', async (interaction) => {
                         `Is the user part of the terribleUsers array? ${terribleUsers.includes(coolUsers.find((o) => o.user == user))}`,
                     ].join('\n')
                 );
-                if (
-                    reaction.emoji.name == specialEmoji.toString() &&
-                    !coolUsers.includes(coolUsers.find((o) => o.user == user)) &&
-                    coolUsers.length < firstUsers &&
-                    !terribleUsers.includes(coolUsers.find((o) => o.user == user))
-                ) {
+                if (reaction.emoji.name == specialEmoji.toString() && !coolUsers.includes(coolUsers.find((o) => o.user == user)) && coolUsers.length < firstUsers && !terribleUsers.includes(coolUsers.find((o) => o.user == user))) {
                     coolUsers.push({
                         user,
                         time: ((Date.now() - baseTime) / 1000).toFixed(1),
                     });
-                    log(
-                        `User ${user.tag} reacted ${utils.ordinal(coolUsers.indexOf(coolUsers.find((o) => o.user == user)) + 1)} with ${
-                            reaction.emoji.name
-                        } in ${((Date.now() - baseTime) / 1000).toFixed(1)}s`
-                    );
+                    log(`User ${user.tag} reacted ${utils.ordinal(coolUsers.indexOf(coolUsers.find((o) => o.user == user)) + 1)} with ${reaction.emoji.name} in ${((Date.now() - baseTime) / 1000).toFixed(1)}s`);
                 } else if (reaction.emoji.name != specialEmoji.toString() && !terribleUsers.includes(user) && !coolUsers.includes(user)) {
                     terribleUsers.push(user);
                     log(`User ${user.tag} reacted incorrectly with ${reaction.emoji.name}`);

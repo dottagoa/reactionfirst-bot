@@ -1,14 +1,15 @@
 {
+    "name": "Reactionator 5000",
+    "description": "Discord bot to get the first few users who react to a message.",
+    "license": "The Unlicense",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Box Supremacy",
+    "keywords": [],
     "dependencies": {
-        "@discordjs/builders": "^1.1.0",
-        "@discordjs/rest": "^1.0.1",
-        "@sapphire/stopwatch": "^1.4.1",
-        "@sapphire/type": "^2.2.4",
-        "@sapphire/utilities": "^3.9.2",
         "discord-api-types": "^0.37.3",
         "discord.js": "^14.2.0",
         "dotenv": "^16.0.1",
-        "ms": "^2.1.3",
         "util": "^0.12.4"
     },
     "scripts": {
