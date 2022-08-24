@@ -10,7 +10,7 @@ Requires Node.js v18 or higher and a working machine.
 
 ```bash
 # clone repo and CD into it
-npx degit boxsux/reactionfirst-bot
+npx degit nullpasswd/reactionfirst-bot reactionfirst-bot
 cd reactionfirst-bot
 
 # install dependencies and register commands
